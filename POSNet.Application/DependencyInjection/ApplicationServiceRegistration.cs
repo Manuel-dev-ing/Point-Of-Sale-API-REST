@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using POSNet.Application.Behaviors;
+using FluentValidation;
 
 namespace POSNet.Application.DependencyInjection
 {
@@ -17,6 +18,11 @@ namespace POSNet.Application.DependencyInjection
             {
                 x.RegisterServicesFromAssembly(typeof(ApplicationServiceRegistration).Assembly);
             });
+
+
+            // 🔹 Registrar todos los Validators en el assembly de Application
+            services.AddValidatorsFromAssembly(typeof(ApplicationServiceRegistration).Assembly);
+
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             return services;

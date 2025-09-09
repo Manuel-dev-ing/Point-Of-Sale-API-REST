@@ -9,22 +9,23 @@ using MediatR;
 namespace POSNet.Application.Behaviors
 {
     public class ValidationBehavior<TRequest, TResponse>: IPipelineBehavior<TRequest, TResponse> 
-        where TRequest : IRequest
+ 
     {
-        private readonly IEnumerable<IValidator<TRequest>> validators;
+        private readonly IEnumerable<IValidator<TRequest>> _validators;
 
         public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
         {
-            this.validators = validators;
+            _validators = validators;
         }
 
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, 
+            CancellationToken cancellationToken)
         {
-            if (validators.Any())
+            if (_validators.Any())
             {
                 var context = new ValidationContext<TRequest>(request);
                 var validationResults = await Task.WhenAll(
-                    validators.Select(v => v.ValidateAsync(context, cancellationToken))
+                    _validators.Select(v => v.ValidateAsync(context, cancellationToken))
                 );
                 var failures = validationResults
                     .SelectMany(r => r.Errors)

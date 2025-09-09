@@ -18,11 +18,8 @@ namespace POSNet.Application.Validations
                 .MaximumLength(100).WithMessage("El nombre no debe superar los 100 caracteres.");
             RuleFor(x => x.Descripcion)
                 .MaximumLength(250).WithMessage("La descripcion no debe superar los 250 caracteres.");
-
-
         }
-
-
-
     }
+
+
 }

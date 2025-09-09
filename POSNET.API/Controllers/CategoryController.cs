@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using POSNet.Application.DTOs;
-using POSNet.Application.Features.Products.Commands;
-using POSNet.Application.Features.Products.Queries;
+using POSNet.Application.Features.Categories.Commands;
+using POSNet.Application.Features.Categories.Queries;
 
 namespace POSNET.API.Controllers
 {

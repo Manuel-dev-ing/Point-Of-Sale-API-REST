@@ -20,7 +20,7 @@ var app = builder.Build();
 //    app.MapOpenApi();
 //}
 
-
+app.UseMiddleware<POSNET.API.Middleware.ExceptionMiddleware>();
 
 app.UseAuthorization();
 
