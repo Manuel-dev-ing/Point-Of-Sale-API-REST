@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MediatR;
+using POSNet.Application.DTOs;
+
+namespace POSNet.Application.Features.Proveedores.Commands
+{
+    public record UpdateProveedorCommand(int Id, int IdCiudad, string Nombre, string PrimerApellido, string SegundoApellido, string Correo, string Telefono, string Colonia, string CodigoPostal)
+        : IRequest<ProveedorDTO?>
+    {
+    }
+}

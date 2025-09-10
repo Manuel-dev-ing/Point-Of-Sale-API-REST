@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using MediatR;
 using POSNet.Application.DTOs;
 using POSNet.Application.Interfaces;
-using POSNet.Domain.Entities;
+using POSNET.Domain.Entities;
+
 
 namespace POSNet.Application.Features.Categories.Commands.Handlers
 {

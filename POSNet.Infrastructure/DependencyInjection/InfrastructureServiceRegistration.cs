@@ -26,6 +26,8 @@ namespace POSNet.Infrastructure.DependencyInjection
 
             services.AddScoped<ICategoryRepository, CategorieRepository>();
             services.AddScoped<IClientsRepository, ClientsRepository>();
+            services.AddScoped<IProveedoresRepository, ProveedoresRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

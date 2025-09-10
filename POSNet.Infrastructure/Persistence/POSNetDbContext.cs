@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using POSNet.Domain.Entities;
+using POSNET.Domain.Entities;
+
 namespace POSNet.Infrastructure.Persistence;
 
 public partial class POSNetDbContext : DbContext
@@ -40,14 +41,12 @@ public partial class POSNetDbContext : DbContext
 
     public virtual DbSet<Venta> Ventas { get; set; }
 
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-
         base.OnModelCreating(modelBuilder);
-        //OnModelCreatingPartial(modelBuilder);
     }
 
-    //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

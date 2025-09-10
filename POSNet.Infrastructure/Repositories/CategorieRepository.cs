@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using POSNet.Application.DTOs;
 using POSNet.Application.Interfaces;
-using POSNet.Domain.Entities;
+
 using POSNet.Infrastructure.Persistence;
+using POSNET.Domain.Entities;
 
 namespace POSNet.Infrastructure.Repositories
 {

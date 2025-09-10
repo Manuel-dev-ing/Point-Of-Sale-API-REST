@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using POSNet.Application.DTOs;
-using POSNet.Domain.Entities;
+using POSNET.Domain.Entities;
+
 
 namespace POSNet.Application.Interfaces
 {

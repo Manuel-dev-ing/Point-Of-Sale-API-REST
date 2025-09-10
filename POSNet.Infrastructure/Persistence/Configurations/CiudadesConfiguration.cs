@@ -10,22 +10,20 @@ using POSNET.Domain.Entities;
 
 namespace POSNet.Infrastructure.Persistence.Configurations
 {
-    public class CategoriaConfiguration : IEntityTypeConfiguration<Categoria>
+    public class CiudadesConfiguration : IEntityTypeConfiguration<Ciudade>
     {
-        public void Configure(EntityTypeBuilder<Categoria> entity)
+        public void Configure(EntityTypeBuilder<Ciudade> entity)
         {
-            entity.ToTable("categorias");
+            entity.ToTable("ciudades");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Descripcion)
-                .HasColumnType("text")
-                .HasColumnName("descripcion");
-            entity.Property(e => e.Estado).HasColumnName("estado");
-            entity.Property(e => e.FechaCreacion).HasColumnName("fecha_creacion");
             entity.Property(e => e.Nombre)
-                .HasMaxLength(50)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("nombre");
+
+
+
         }
     }
 }

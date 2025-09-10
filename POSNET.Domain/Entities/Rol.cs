@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace POSNet.Domain.Entities;
+namespace POSNET.Domain.Entities;
 
 public partial class Rol
 {

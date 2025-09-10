@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace POSNet.Domain.Entities;
+namespace POSNET.Domain.Entities;
 
 public partial class Proveedore
 {
@@ -26,4 +26,6 @@ public partial class Proveedore
     public bool? Estado { get; set; }
 
     public virtual ICollection<Compra> Compras { get; set; } = new List<Compra>();
+
+    public virtual Ciudade? IdCiudadNavigation { get; set; }
 }
