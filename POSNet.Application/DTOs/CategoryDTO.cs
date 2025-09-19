@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using POSNET.Domain.Entities;
 
 namespace POSNet.Application.DTOs
 {
@@ -18,7 +19,7 @@ namespace POSNet.Application.DTOs
 
         public bool Estado { get; set; }
 
-
+        public int Productos { get; set; }
 
     }
 }

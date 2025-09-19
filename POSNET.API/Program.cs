@@ -10,7 +10,17 @@ builder.Services.AddControllers();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
+var origenes_permitidos = builder.Configuration.GetSection("originesPermitidos").Get<string[]>();
 
+builder.Services.AddCors(x =>
+{
+    x.AddDefaultPolicy(opciones =>
+    {
+        opciones.WithOrigins(origenes_permitidos).AllowAnyMethod().AllowAnyHeader();
+
+    });
+
+});
 
 var app = builder.Build();
 
@@ -19,13 +29,13 @@ var app = builder.Build();
 //{
 //    app.MapOpenApi();
 //}
+app.UseCors();
 
 app.UseMiddleware<POSNET.API.Middleware.ExceptionMiddleware>();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
 
 
 app.Run();

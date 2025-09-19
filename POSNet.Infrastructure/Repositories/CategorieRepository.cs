@@ -31,15 +31,17 @@ namespace POSNet.Infrastructure.Repositories
 
         public async Task<CategoryDTO> GetCategory(int id)
         {
-            var categoryDTO = await context.Categorias.Select(x => new CategoryDTO()
-            {
-                Id = x.Id,
-                Nombre = x.Nombre,
-                Descripcion = x.Descripcion,
-                FechaCreacion = (DateOnly)x.FechaCreacion,
-                Estado = (bool)x.Estado
+            var categoryDTO = await context.Categorias
+                .Select(x => new CategoryDTO()
+                {
+                    Id = x.Id,
+                    Nombre = x.Nombre,
+                    Descripcion = x.Descripcion,
+                    FechaCreacion = (DateOnly)x.FechaCreacion,
+                    Productos = x.Productos.Count(),
+                    Estado = (bool)x.Estado
 
-            }).FirstOrDefaultAsync(x => x.Id == id);
+                }).FirstOrDefaultAsync(x => x.Id == id);
 
             return categoryDTO;
         }
@@ -55,9 +57,10 @@ namespace POSNet.Infrastructure.Repositories
                 Nombre = x.Nombre,
                 Descripcion = x.Descripcion,
                 Estado = (bool)x.Estado,
-                FechaCreacion = (DateOnly)x.FechaCreacion
+                FechaCreacion = (DateOnly)x.FechaCreacion,
+                Productos = x.Productos.Count(),
 
-            }).ToListAsync();
+           }).ToListAsync();
 
             return categories;
         }
