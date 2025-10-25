@@ -23,6 +23,7 @@ namespace POSNet.Infrastructure.Persistence.Configurations
             entity.Property(e => e.Descripcion)
                 .HasColumnType("text")
                 .HasColumnName("descripcion");
+            entity.Property(e => e.Estado).HasColumnName("estado");
             entity.Property(e => e.IdCategoria).HasColumnName("id_categoria");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(200)

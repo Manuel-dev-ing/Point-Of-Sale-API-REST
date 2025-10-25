@@ -21,6 +21,8 @@ public partial class Producto
 
     public string? Descripcion { get; set; }
 
+    public bool? Estado { get; set; }
+
     public virtual ICollection<DetalleCompra> DetalleCompras { get; set; } = new List<DetalleCompra>();
 
     public virtual ICollection<DetalleVentum> DetalleVenta { get; set; } = new List<DetalleVentum>();
@@ -28,4 +30,7 @@ public partial class Producto
     public virtual Categoria? IdCategoriaNavigation { get; set; }
 
     public virtual ICollection<Movimiento> Movimientos { get; set; } = new List<Movimiento>();
+
+
+
 }

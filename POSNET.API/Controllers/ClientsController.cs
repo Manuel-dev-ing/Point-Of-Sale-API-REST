@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using POSNet.Application.DTOs;
 using POSNet.Application.Features.Clients.Commands;
 using POSNet.Application.Features.Clients.Queries;
+using POSNet.Application.Features.Products.Queries;
 
 namespace POSNET.API.Controllers
 {
@@ -31,6 +32,14 @@ namespace POSNET.API.Controllers
             var client = await mediator.Send(new GetClientQuery(id));
 
             return client;
+        }
+
+        [HttpGet("getAllClients")]
+        public async Task<List<ClientDTO>> getAllClients()
+        {
+            var clientsDTO = await mediator.Send(new GetClientsQuery());
+
+            return clientsDTO;
         }
 
         [HttpPost]
