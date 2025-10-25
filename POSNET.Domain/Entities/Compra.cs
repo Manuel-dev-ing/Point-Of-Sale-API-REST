@@ -24,4 +24,6 @@ public partial class Compra
     public virtual Proveedore? IdProveedorNavigation { get; set; }
 
     public virtual Usuario? IdUsuarioNavigation { get; set; }
+
+    
 }
