@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace POSNET.Domain.Entities;
 
@@ -11,6 +12,7 @@ public partial class Usuario
 
     public string? Nombre { get; set; }
 
+    [Column("primer_apellido")]
     public string? PrimerApellido { get; set; }
 
     public string? SegundoApellido { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace POSNET.Domain.Entities;
 
@@ -7,6 +8,7 @@ public partial class Venta
 {
     public int Id { get; set; }
 
+   
     public int? IdUsuario { get; set; }
 
     public int? IdCliente { get; set; }
