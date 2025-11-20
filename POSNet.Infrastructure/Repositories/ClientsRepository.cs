@@ -21,6 +21,13 @@ namespace POSNet.Infrastructure.Repositories
             this.context = context;
         }
 
+        public async Task<int> getTotalClients()
+        {
+            var total = context.Clientes.Count();
+
+            return total;
+        }
+
         public async Task<Cliente> GetClient(int id)
         {
             var client = await context.Clientes.FirstOrDefaultAsync(x => x.Id == id);

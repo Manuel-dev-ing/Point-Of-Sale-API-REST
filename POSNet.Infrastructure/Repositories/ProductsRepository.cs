@@ -20,6 +20,35 @@ namespace POSNet.Infrastructure.Repositories
             this.context = context;
         }
 
+        public async Task<List<ProductDTO>> getLowStockProducts()
+        {
+            var products = await context.Productos
+                .Where(x => x.StockInicial <= x.StockMinimo)
+                .Select(x => new ProductDTO()
+                {
+                    Id = x.Id,
+                    IdCategoria = (int)x.IdCategoria,
+                    Nombre = x.Nombre,
+                    Precio = (decimal)x.Precio,
+                    StockInicial = (int)x.StockInicial,
+                    StockMinimo = (int)x.StockMinimo,
+                    CodigoBarras = x.CodigoBarras,
+                    Descripcion = x.Descripcion,
+                    Estado = (bool)x.Estado
+                })
+                .Take(5)
+                .ToListAsync();
+
+            return products;
+        }
+
+        public async Task<int> getTotalProducts()
+        {
+            var total = context.Productos.Count();
+
+            return total;
+        }
+
 
         public async Task<List<ProductsDTO>> GetProducts()
         {
@@ -39,8 +68,8 @@ namespace POSNet.Infrastructure.Repositories
                                         Estado = (bool)x.Estado
 
                                     }).ToListAsync();
+         
             return productsDTO;
-
         }
 
         public async Task<ProductDTO> getProduct(int id)

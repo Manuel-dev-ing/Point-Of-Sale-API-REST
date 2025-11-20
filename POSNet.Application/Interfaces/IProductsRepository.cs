@@ -10,9 +10,11 @@ namespace POSNet.Application.Interfaces
 {
     public interface IProductsRepository
     {
+        Task<List<ProductDTO>> getLowStockProducts();
         Task<ProductDTO> getProduct(int id);
         Task<Producto> getProductoById(int id);
         Task<List<ProductsDTO>> GetProducts();
+        Task<int> getTotalProducts();
         Task guardar(Producto producto);
         Task update(Producto producto);
     }

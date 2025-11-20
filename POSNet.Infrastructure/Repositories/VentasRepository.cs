@@ -18,6 +18,19 @@ namespace POSNet.Infrastructure.Repositories
             this.context = context;
         }
 
+        public async Task<decimal> getTotalRevenue()
+        {
+            var total = context.Ventas.Sum(x => x.Total);
+
+            return (decimal)total;
+        }
+
+        public async Task<int> getTotalVentas()
+        {
+            var total = context.Ventas.Count();
+
+            return total;
+        }
 
         public async Task createVenta(Venta venta)
         {
