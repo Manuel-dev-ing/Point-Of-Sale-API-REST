@@ -1,6 +1,9 @@
 ﻿using System.Net;
 using System.Text.Json;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
+using POSNet.Application.Common.Exceptions;
 
 namespace POSNET.API.Middleware
 {
@@ -15,17 +18,45 @@ namespace POSNET.API.Middleware
             this.logger = logger;
         }
 
-        public async Task InvokeAsync(HttpContext httpContext)
+        public async Task Invoke(HttpContext context)
         {
             try
             {
-                await next(httpContext);
+                await next(context);
+            }
+            catch (ValidationException ex)
+            {
+                await WriteProblemDetails(context, 400, ex.Errors);
+            }
+            catch (NotFoundException ex)
+            {
+                await WriteProblemDetails(context, 404, ex.Message);
+            }
+            catch (DomainException ex)
+            {
+                await WriteProblemDetails(context, 409, ex.Message);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Ocurrió un error");
-                await HandleExceptionAsync(httpContext, ex);
+                await WriteProblemDetails(context, 500, "Unexpected Server Error");
             }
+        
+        }
+
+        private async Task WriteProblemDetails(
+        HttpContext ctx, int status, object detail)
+        {
+            ctx.Response.StatusCode = status;
+            ctx.Response.ContentType = "application/problem+json";
+
+            var problem = new ProblemDetails
+            {
+                Status = status,
+                Title = ReasonPhrases.GetReasonPhrase(status),
+                Detail = detail?.ToString()
+            };
+
+            await ctx.Response.WriteAsJsonAsync(problem);
         }
 
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)

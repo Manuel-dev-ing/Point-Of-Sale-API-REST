@@ -12,6 +12,9 @@ namespace POSNet.Application.Interfaces
     {
         Task create(Usuario usuario);
         Task delete(Usuario usuario);
+        Task<Usuario> FindByEmailAsync(string email);
+        Task<Usuario> FindByIdAsync(int id);
+        Task<profileDTO> GetProfile(string email);
         Task<List<RolDTO>> GetRols();
         Task<UserDTO> GetUserById(int id);
         Task<List<UserDTO>> GetUsers();

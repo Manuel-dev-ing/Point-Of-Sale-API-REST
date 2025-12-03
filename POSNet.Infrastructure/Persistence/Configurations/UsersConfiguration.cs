@@ -21,11 +21,16 @@ namespace POSNet.Infrastructure.Persistence.Configurations
                 .IsUnicode(false)
                 .HasColumnName("correo");
             entity.Property(e => e.Estado).HasColumnName("estado");
+            entity.Property(e => e.FechaCreacion).HasColumnName("fecha_creacion");
             entity.Property(e => e.IdRol).HasColumnName("id_rol");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("nombre");
+            entity.Property(e => e.Password)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("password");
             entity.Property(e => e.PrimerApellido)
                 .HasMaxLength(100)
                 .IsUnicode(false)

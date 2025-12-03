@@ -1,11 +1,13 @@
 ﻿using System.Reflection;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using POSNet.Application.DTOs;
 using POSNet.Application.Features.Reports.Queries;
 
 namespace POSNET.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/reports")]
     public class ReportsController : ControllerBase

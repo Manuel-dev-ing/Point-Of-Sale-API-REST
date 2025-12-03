@@ -21,7 +21,10 @@ namespace POSNet.Application.DTOs
 
         public string? Correo { get; set; }
 
+        public string? Password { get; set; }
+
         public bool? Estado { get; set; }
+        public DateOnly? FechaCreacion { get; set; }
 
 
     }

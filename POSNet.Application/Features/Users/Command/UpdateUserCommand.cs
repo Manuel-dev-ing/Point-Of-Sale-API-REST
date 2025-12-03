@@ -7,7 +7,7 @@ using MediatR;
 
 namespace POSNet.Application.Features.Users.Command
 {
-    public record UpdateUserCommand(int id, int idRol, string Nombre, string PrimerApellido, string SegundoApellido, string Correo, bool Estado) : IRequest
+    public record UpdateUserCommand(int id, int idRol, string Nombre, string PrimerApellido, string SegundoApellido, string Password, string Correo, bool Estado) : IRequest
     {
     }
 }

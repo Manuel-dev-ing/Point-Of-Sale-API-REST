@@ -12,14 +12,17 @@ public partial class Usuario
 
     public string? Nombre { get; set; }
 
-    [Column("primer_apellido")]
     public string? PrimerApellido { get; set; }
 
     public string? SegundoApellido { get; set; }
 
     public string? Correo { get; set; }
 
+    public string? Password { get; set; }
+
     public bool? Estado { get; set; }
+
+    public DateOnly? FechaCreacion { get; set; }
 
     public virtual ICollection<Compra> Compras { get; set; } = new List<Compra>();
 

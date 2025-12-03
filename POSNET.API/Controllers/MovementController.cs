@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using POSNet.Application.DTOs;
 using POSNet.Application.Features.Movements.Commands;
@@ -6,6 +7,7 @@ using POSNet.Application.Features.Movements.Queries;
 
 namespace POSNET.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/inventory")]
     public class MovementController : ControllerBase

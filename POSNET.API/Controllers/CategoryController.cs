@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using POSNet.Application.DTOs;
@@ -7,9 +8,10 @@ using POSNet.Application.Features.Categories.Queries;
 
 namespace POSNET.API.Controllers
 {
-
+    [Authorize]
     [ApiController]
     [Route("api/categories")]
+    
     public class CategoryController : ControllerBase
     {
         private readonly IMediator mediator;

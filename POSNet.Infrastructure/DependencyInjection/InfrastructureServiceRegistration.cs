@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using POSNet.Application.Interfaces;
 using POSNet.Infrastructure.Persistence;
 using POSNet.Infrastructure.Repositories;
+using POSNET.Domain.Entities;
 
 namespace POSNet.Infrastructure.DependencyInjection
 {
@@ -33,6 +36,8 @@ namespace POSNet.Infrastructure.DependencyInjection
             services.AddScoped<IMovementRepository, MovementRepository>();
             services.AddScoped<IReportsRepository, ReportsRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            services.AddScoped<ITokenRepository, TokenRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

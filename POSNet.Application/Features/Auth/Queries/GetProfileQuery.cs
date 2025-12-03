@@ -7,9 +7,9 @@ using MediatR;
 using POSNet.Application.Common.Models;
 using POSNet.Application.DTOs;
 
-namespace POSNet.Application.Features.Users.Command
+namespace POSNet.Application.Features.Auth.Queries
 {
-    public record createUserCommand(int idRol, string Nombre, string PrimerApellido, string SegundoApellido, string Password, string Correo) : IRequest<Result<UserDTO>>
+    public record GetProfileQuery(string email) : IRequest<profileDTO>
     {
     }
 }

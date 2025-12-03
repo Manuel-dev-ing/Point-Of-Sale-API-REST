@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using POSNet.Application.Features.Compras.Commands;
 
 namespace POSNET.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/compras")]
     public class ComprasController : ControllerBase

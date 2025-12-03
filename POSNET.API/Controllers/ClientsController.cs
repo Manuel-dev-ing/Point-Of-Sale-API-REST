@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using POSNet.Application.DTOs;
 using POSNet.Application.Features.Clients.Commands;
@@ -7,6 +8,7 @@ using POSNet.Application.Features.Products.Queries;
 
 namespace POSNET.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/clients")]
     public class ClientsController : ControllerBase

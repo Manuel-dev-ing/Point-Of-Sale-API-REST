@@ -20,6 +20,24 @@ namespace POSNet.Infrastructure.Repositories
             this.context = context;
         }
 
+        public async Task<profileDTO> GetProfile(string email)
+        {
+            var user = await context.Usuarios
+                .Where(x => x.Estado == true && x.Correo == email)
+                .Select(x => new profileDTO
+                {
+                    Id = x.Id,
+                    IdRol = (int)x.IdRol,
+                    NombreRol = x.IdRolNavigation.Nombre,
+                    Nombre = x.Nombre,
+                    PrimerApellido = x.PrimerApellido,
+                    SegundoApellido = x.SegundoApellido
+                
+                }).FirstOrDefaultAsync();
+
+            return user;
+        }
+
         public async Task<List<RolDTO>> GetRols()
         {
             var rols = await context.Rols
@@ -45,10 +63,32 @@ namespace POSNet.Infrastructure.Repositories
                        PrimerApellido = x.PrimerApellido,
                        SegundoApellido = x.SegundoApellido,
                        Correo = x.Correo,
-                       Estado = x.Estado
+                       Password = x.Password,
+                       Estado = x.Estado,
+                       FechaCreacion = x.FechaCreacion
                    }).ToListAsync();
 
             return users;
+        }
+
+        public async Task<Usuario> FindByEmailAsync(string email)
+        {
+            var user = await context.Usuarios
+                .Where(x => x.Correo == email && x.Estado == true)
+                .FirstOrDefaultAsync();
+
+
+            return user;
+        }
+
+        public async Task<Usuario> FindByIdAsync(int id)
+        {
+            var user = await context.Usuarios
+                .Where(x => x.Id == id && x.Estado == true)
+                .FirstOrDefaultAsync();
+                
+
+            return user;
         }
 
         public async Task<UserDTO> GetUserById(int id)

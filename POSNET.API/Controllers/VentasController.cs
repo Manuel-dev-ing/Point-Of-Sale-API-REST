@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using POSNet.Application.DTOs;
 using POSNet.Application.Features.Ventas.Commands;
 
 namespace POSNET.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/ventas")]
     public class VentasController : ControllerBase

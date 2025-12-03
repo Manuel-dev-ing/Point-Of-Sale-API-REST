@@ -50,11 +50,11 @@ namespace POSNET.API.Controllers
 
         [HttpPost]
         public async Task<ActionResult> post([FromBody] createUserCommand command)
-        {
+        {//crea un usuario
 
             var user = await mediator.Send(command);
 
-            return CreatedAtAction(nameof(getUserById), new { id = user.Id }, user);
+            return CreatedAtAction(nameof(getUserById), new { id = user.Value.Id }, user);
         }
 
         [HttpPut("{id:int}")]
@@ -65,6 +65,7 @@ namespace POSNET.API.Controllers
             {
                 return NotFound("El id de la url no coincide con el id del cuerpo de la solicitud");
             }
+
             await mediator.Send(command);
 
             return NoContent();
