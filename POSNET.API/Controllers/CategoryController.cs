@@ -8,7 +8,7 @@ using POSNet.Application.Features.Categories.Queries;
 
 namespace POSNET.API.Controllers
 {
-    [Authorize]
+    
     [ApiController]
     [Route("api/categories")]
     

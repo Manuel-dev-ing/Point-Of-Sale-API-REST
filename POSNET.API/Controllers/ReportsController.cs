@@ -7,7 +7,7 @@ using POSNet.Application.Features.Reports.Queries;
 
 namespace POSNET.API.Controllers
 {
-    [Authorize]
+    
     [ApiController]
     [Route("api/reports")]
     public class ReportsController : ControllerBase
@@ -17,6 +17,14 @@ namespace POSNET.API.Controllers
         public ReportsController(IMediator mediator)
         {
             this.mediator = mediator;
+        }
+
+        [HttpGet("resumeStatistics")]
+        public async Task<ReportStatisticsDTO> resumeStatistics()
+        {
+            var resumeStatistics = await mediator.Send(new GetStatisticsQuery());
+
+            return resumeStatistics;
         }
 
         [HttpGet("ventasCategorias")]

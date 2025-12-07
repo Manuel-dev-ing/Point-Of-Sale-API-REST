@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using POSNet.Application.Interfaces;
 using POSNET.Domain.Entities;
 
@@ -13,16 +14,35 @@ namespace POSNet.Infrastructure.Identity.Stores
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IUsersRepository usersRepository;
+        private readonly IRolRepository rolRepository;
+        private readonly IUserRolRepository userRolRepository;
 
-        public UsuarioStore(IUnitOfWork unitOfWork, IUsersRepository usersRepository)
+        public UsuarioStore(IUnitOfWork unitOfWork, IUsersRepository usersRepository, 
+            IRolRepository rolRepository, IUserRolRepository userRolRepository)
         {
             this.unitOfWork = unitOfWork;
             this.usersRepository = usersRepository;
+            this.rolRepository = rolRepository;
+            this.userRolRepository = userRolRepository;
         }
 
-        public Task AddToRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
+        public async Task AddToRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var role = await rolRepository.GetRolByName(roleName);
+
+            if (role == null)
+                throw new InvalidOperationException($"El rol '{roleName}' no existe.");
+
+            var exist = await userRolRepository.ExistUserRol(user, role);
+
+            if (!exist)
+            {
+                await userRolRepository.Create(user, role);
+                await unitOfWork.CommitAsymc();
+            }
+
         }
 
         public async Task<IdentityResult> CreateAsync(Usuario user, CancellationToken cancellationToken)
@@ -92,9 +112,12 @@ namespace POSNet.Infrastructure.Identity.Stores
             return Task.FromResult(user.Password);
         }
 
-        public Task<IList<string>> GetRolesAsync(Usuario user, CancellationToken cancellationToken)
+        public async Task<IList<string>> GetRolesAsync(Usuario user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+
+            var roles = await userRolRepository.GetRolesAsync(user);
+
+            return roles;
         }
 
         public Task<string> GetUserIdAsync(Usuario user, CancellationToken cancellationToken)
@@ -107,9 +130,12 @@ namespace POSNet.Infrastructure.Identity.Stores
             return Task.FromResult(user.Correo);
         }
 
-        public Task<IList<Usuario>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        public async Task<IList<Usuario>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var users = await userRolRepository.GetUsersInRoleAsync(roleName);
+            return users;
         }
 
         public Task<bool> HasPasswordAsync(Usuario user, CancellationToken cancellationToken)
@@ -117,14 +143,32 @@ namespace POSNet.Infrastructure.Identity.Stores
             return Task.FromResult(user.Password != null);
         }
 
-        public Task<bool> IsInRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
+        public async Task<bool> IsInRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var exist = await userRolRepository.IsInRoleAsync(user, roleName);
+
+            return exist;
         }
 
-        public Task RemoveFromRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
+        public async Task RemoveFromRoleAsync(Usuario user, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+
+            var role = await rolRepository.GetRolByName(roleName);
+
+            if (role == null)
+                throw new InvalidOperationException($"El rol '{roleName}' no existe.");
+
+            var exist = await userRolRepository.ExistUserRol(user, role);
+
+            if (!exist)
+            {
+                await userRolRepository.Create(user, role);
+                await unitOfWork.CommitAsymc();
+            }
+
+
         }
 
         public Task SetEmailAsync(Usuario user, string? email, CancellationToken cancellationToken)

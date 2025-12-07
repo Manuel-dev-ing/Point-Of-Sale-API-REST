@@ -38,6 +38,8 @@ namespace POSNet.Infrastructure.DependencyInjection
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<ITokenRepository, TokenRepository>();
+            services.AddScoped<IRolRepository, RolRepository>();
+            services.AddScoped<IUserRolRepository, UserRolRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

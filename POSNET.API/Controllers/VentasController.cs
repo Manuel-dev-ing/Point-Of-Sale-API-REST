@@ -6,7 +6,7 @@ using POSNet.Application.Features.Ventas.Commands;
 
 namespace POSNET.API.Controllers
 {
-    [Authorize]
+   
     [ApiController]
     [Route("api/ventas")]
     public class VentasController : ControllerBase

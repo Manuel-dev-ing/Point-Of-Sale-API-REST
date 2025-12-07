@@ -7,7 +7,7 @@ using POSNet.Application.Features.Proveedores.Queries;
 
 namespace POSNET.API.Controllers
 {
-    [Authorize]
+    
     [ApiController]
     [Route("api/proveedores")]
     public class ProveedoresController : ControllerBase

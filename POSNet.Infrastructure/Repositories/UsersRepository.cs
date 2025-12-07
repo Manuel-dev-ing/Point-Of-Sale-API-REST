@@ -27,12 +27,16 @@ namespace POSNet.Infrastructure.Repositories
                 .Select(x => new profileDTO
                 {
                     Id = x.Id,
-                    IdRol = (int)x.IdRol,
-                    NombreRol = x.IdRolNavigation.Nombre,
+                    Roles = x.UsuarioRols.Where(x => x.IdUsuarioNavigation.Correo == email).Select(x => new RolDTO()
+                    {
+                        Id = x.IdRol,
+                        Nombre = x.IdRolNavigation.Nombre
+
+                    }).ToList(),
                     Nombre = x.Nombre,
                     PrimerApellido = x.PrimerApellido,
                     SegundoApellido = x.SegundoApellido
-                
+
                 }).FirstOrDefaultAsync();
 
             return user;

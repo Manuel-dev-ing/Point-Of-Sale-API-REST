@@ -7,7 +7,7 @@ using POSNet.Application.Features.Products.Queries;
 
 namespace POSNET.API.Controllers
 {
-    [Authorize]
+    
     [ApiController]
     [Route("api/products")]
     public class ProductsController : ControllerBase

@@ -7,7 +7,7 @@ using POSNet.Application.Features.Movements.Queries;
 
 namespace POSNET.API.Controllers
 {
-    [Authorize]
+   
     [ApiController]
     [Route("api/inventory")]
     public class MovementController : ControllerBase

@@ -9,12 +9,10 @@ namespace POSNet.Application.DTOs
     public class profileDTO
     {
         public int Id { get; set; }
-        public int IdRol { get; set; }
-        public string NombreRol { get; set; }
         public string Nombre { get; set; }
         public string PrimerApellido { get; set; }
         public string? SegundoApellido { get; set; }
-
+        public List<RolDTO> Roles { get; set; }
 
 
     }

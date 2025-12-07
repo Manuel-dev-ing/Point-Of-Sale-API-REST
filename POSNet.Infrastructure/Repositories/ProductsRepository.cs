@@ -42,6 +42,20 @@ namespace POSNet.Infrastructure.Repositories
             return products;
         }
 
+        public async Task<int> getTotalInventory()
+        {
+            var total = context.Productos.Sum(x => x.StockInicial * x.Precio);
+
+            return (int)total;
+        }
+
+        public async Task<int> getTotalUnitsProducts()
+        {
+            var total = context.Productos.Sum(x => x.StockInicial);
+
+            return (int)total;
+        }
+
         public async Task<int> getTotalProducts()
         {
             var total = context.Productos.Count();

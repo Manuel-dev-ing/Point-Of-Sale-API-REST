@@ -14,7 +14,9 @@ namespace POSNet.Application.Interfaces
         Task<ProductDTO> getProduct(int id);
         Task<Producto> getProductoById(int id);
         Task<List<ProductsDTO>> GetProducts();
+        Task<int> getTotalInventory();
         Task<int> getTotalProducts();
+        Task<int> getTotalUnitsProducts();
         Task guardar(Producto producto);
         Task update(Producto producto);
     }

@@ -4,7 +4,6 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using POSNET.Domain.Entities;
 
-
 namespace POSNet.Infrastructure.Persistence;
 
 public partial class POSNetDbContext : DbContext
@@ -42,13 +41,18 @@ public partial class POSNetDbContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
+    public virtual DbSet<UsuarioRol> UsuarioRols { get; set; }
+
     public virtual DbSet<Venta> Ventas { get; set; }
 
+   
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
     }
 
-    //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+   
 }

@@ -8,7 +8,7 @@ using POSNet.Application.Features.Products.Queries;
 
 namespace POSNET.API.Controllers
 {
-    [Authorize]
+   
     [ApiController]
     [Route("api/clients")]
     public class ClientsController : ControllerBase
