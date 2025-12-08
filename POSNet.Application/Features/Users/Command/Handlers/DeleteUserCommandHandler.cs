@@ -29,7 +29,7 @@ namespace POSNet.Application.Features.Users.Command.Handlers
                 var usuario = new Usuario()
                 {
                     Id = user.Id,
-                    IdRol = user.IdRol,
+                    
                     Nombre = user.Nombre,
                     PrimerApellido = user.PrimerApellido,
                     SegundoApellido = user.SegundoApellido,

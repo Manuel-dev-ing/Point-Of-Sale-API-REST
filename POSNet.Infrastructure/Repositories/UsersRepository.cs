@@ -62,7 +62,6 @@ namespace POSNet.Infrastructure.Repositories
                    .Select(x => new UserDTO()
                    {
                        Id = x.Id,
-                       IdRol = x.IdRol,
                        Nombre = x.Nombre,
                        PrimerApellido = x.PrimerApellido,
                        SegundoApellido = x.SegundoApellido,
@@ -102,7 +101,6 @@ namespace POSNet.Infrastructure.Repositories
                 .Select(x => new UserDTO()
                 {
                     Id = x.Id,
-                    IdRol = x.IdRol,
                     Nombre = x.Nombre,
                     PrimerApellido = x.PrimerApellido,
                     SegundoApellido = x.SegundoApellido,

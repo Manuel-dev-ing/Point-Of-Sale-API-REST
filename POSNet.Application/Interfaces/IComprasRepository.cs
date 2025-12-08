@@ -10,5 +10,6 @@ namespace POSNet.Application.Interfaces
     public interface IComprasRepository
     {
         Task createCompra(Compra compra);
+        Task<int> getTotalCompras();
     }
 }

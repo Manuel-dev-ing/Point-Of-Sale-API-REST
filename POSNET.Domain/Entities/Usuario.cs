@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace POSNET.Domain.Entities;
 
 public partial class Usuario
 {
     public int Id { get; set; }
-
-    public int? IdRol { get; set; }
 
     public string? Nombre { get; set; }
 
@@ -26,10 +23,9 @@ public partial class Usuario
 
     public virtual ICollection<Compra> Compras { get; set; } = new List<Compra>();
 
-    public virtual ICollection<UsuarioRol> UsuarioRols { get; set; } = new List<UsuarioRol>();
-
-
     public virtual ICollection<Movimiento> Movimientos { get; set; } = new List<Movimiento>();
+
+    public virtual ICollection<UsuarioRol> UsuarioRols { get; set; } = new List<UsuarioRol>();
 
     public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
 }

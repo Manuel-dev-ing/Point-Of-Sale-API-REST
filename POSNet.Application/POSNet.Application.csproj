@@ -21,10 +21,8 @@
 
   <ItemGroup>
     <Folder Include="Features\Categories\" />
-    <Folder Include="Features\Compras\Queries\" />
     <Folder Include="Features\Dashboard\Commands\Handlers\" />
     <Folder Include="Features\Reports\Commands\Handlers\" />
-    <Folder Include="Features\Ventas\Queries\" />
   </ItemGroup>
 
 </Project>

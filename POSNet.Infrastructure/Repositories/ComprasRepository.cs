@@ -18,6 +18,12 @@ namespace POSNet.Infrastructure.Repositories
             this.context = context;
         }
 
+        public async Task<int> getTotalCompras()
+        {
+            var total = context.Compras.Count();
+
+            return total;
+        }
 
         public async Task createCompra(Compra compra)
         {

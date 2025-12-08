@@ -32,7 +32,7 @@ namespace POSNet.Application.Features.Users.Command.Handlers
         {
             var usuario = new Usuario()
             {
-                IdRol = request.idRol,
+              
                 Nombre = request.Nombre,
                 PrimerApellido = request.PrimerApellido,
                 SegundoApellido = request.SegundoApellido,
@@ -64,7 +64,7 @@ namespace POSNet.Application.Features.Users.Command.Handlers
             return Result<UserDTO>.OK(new UserDTO
             {
                 Id = usuario.Id,
-                IdRol = usuario.IdRol,
+                
                 Nombre = usuario.Nombre,
                 PrimerApellido = usuario.PrimerApellido,
                 SegundoApellido = usuario.SegundoApellido,

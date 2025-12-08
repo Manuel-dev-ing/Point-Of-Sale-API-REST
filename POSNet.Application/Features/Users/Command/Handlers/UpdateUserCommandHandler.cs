@@ -32,7 +32,6 @@ namespace POSNet.Application.Features.Users.Command.Handlers
             {
                 await unitOfWork.BeginTransactionAsync();
                 var user = await usersRepository.FindByIdAsync(request.id);
-                user.IdRol = request.idRol;
                 user.Nombre = request.Nombre;
                 user.PrimerApellido = request.PrimerApellido;
                 user.SegundoApellido = request.SegundoApellido;
