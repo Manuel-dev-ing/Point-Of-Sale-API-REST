@@ -93,6 +93,7 @@ namespace POSNet.Infrastructure.Repositories
                     Ingresos = (decimal)g.Sum(x => x.Total),
                     Ventas = (decimal)g.Sum(x => x.Total),
                     Fecha = (DateOnly)g.Key
+
                 }).ToListAsync();
 
 

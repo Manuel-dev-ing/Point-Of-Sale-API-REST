@@ -35,11 +35,11 @@ namespace POSNet.Application.Features.Auth.Commands.Handlers
             var user = await userManager.FindByEmailAsync(request.Email);
             if (user == null)
             {
-                throw new DomainException("Credenciales inválidas");
+                throw new DomainException("Tu dirección de correo electrónico o contraseña no son válidas. ¡Inténtalo de nuevo!");
             }
 
             var password = await userManager.CheckPasswordAsync(user, request.Password);
-            if (!password) throw new DomainException("Credenciales inválidas");
+            if (!password) throw new DomainException("Tu dirección de correo electrónico o contraseña no son válidas. ¡Inténtalo de nuevo!");
 
             var resultado = await tokenRepository.CreateTokensAsync(user);
 
