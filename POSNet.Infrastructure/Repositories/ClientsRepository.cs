@@ -38,6 +38,7 @@ namespace POSNet.Infrastructure.Repositories
         public async Task<ClientDTO> GetClientAsync(int id)
         {
             var clientDTO = await context.Clientes
+                .Where(x => x.Id == id)
                 .Select(x => new ClientDTO()
                 {
                     Id = x.Id,
@@ -46,9 +47,15 @@ namespace POSNet.Infrastructure.Repositories
                     SegundoApellido = x.SegundoApellido,
                     Correo = x.Correo,
                     Telefono = x.Telefono,
-                    Estado = (bool)x.Estado
+                    Estado = (bool)x.Estado,
+                    HistorialCompras = x.Venta.Select(v => new PurchaseHistoryDTO()
+                    {
+                        Fecha = (DateOnly)v.Fecha,
+                        Total = (decimal)v.Total
 
-                }).FirstOrDefaultAsync(x => x.Id == id);
+                    }).ToList()
+
+                }).FirstOrDefaultAsync();
 
             return clientDTO;
         }
@@ -65,7 +72,14 @@ namespace POSNet.Infrastructure.Repositories
                     SegundoApellido = x.SegundoApellido,
                     Correo = x.Correo,
                     Telefono = x.Telefono,
-                    Estado = (bool)x.Estado
+                    Estado = (bool)x.Estado,
+                    HistorialCompras = x.Venta.Select(v => new PurchaseHistoryDTO()
+                    {
+                        Fecha = (DateOnly)v.Fecha,
+                        Items = v.DetalleVenta.Select(x => x.Cantidad).Count(),
+                        Total = (decimal)v.Total
+
+                    }).ToList()
                 }).ToListAsync();
 
             return clientsDTO;

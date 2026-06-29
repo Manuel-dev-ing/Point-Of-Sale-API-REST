@@ -22,6 +22,7 @@ namespace POSNet.Application.DTOs
 
         public bool Estado { get; set; }
 
+        public List<PurchaseHistoryDTO> HistorialCompras { get; set; }
 
     }
 }
