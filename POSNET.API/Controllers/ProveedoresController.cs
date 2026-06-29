@@ -28,7 +28,7 @@ namespace POSNET.API.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<ProveedorDTO>> getProveedor(int id)
+        public async Task<ActionResult<ProveedoresDTO>> getProveedor(int id)
         {
             var proveedor = await mediator.Send(new GetProveedorQuery(id));
             if (proveedor == null)

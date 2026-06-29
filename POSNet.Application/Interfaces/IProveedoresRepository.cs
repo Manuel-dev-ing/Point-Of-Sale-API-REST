@@ -11,7 +11,7 @@ namespace POSNet.Application.Interfaces
     public interface IProveedoresRepository
     {
         Task AddAsync(Proveedore proveedore);
-        Task<ProveedorDTO> GetProveedor(int id);
+        Task<ProveedoresDTO> GetProveedor(int id);
         Task<List<ProveedoresDTO>> GetProveedoresAsync();
         Task<Proveedore> GetProveedorId(int id);
         Task UpdateAsync(Proveedore proveedore);

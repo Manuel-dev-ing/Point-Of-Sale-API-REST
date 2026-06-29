@@ -43,13 +43,14 @@ namespace POSNet.Infrastructure.Repositories
 
         }
 
-        public async Task<ProveedorDTO> GetProveedor(int id)
+        public async Task<ProveedoresDTO> GetProveedor(int id)
         {
             var proveedor = await context.Proveedores
-                .Select(x => new ProveedorDTO()
+                .Include(x => x.IdCiudadNavigation)
+                .Select(x => new ProveedoresDTO()
                 {
                     Id = x.Id,
-                    IdCiudad = (int)x.IdCiudad,
+                    Ciudad = x.IdCiudadNavigation.Nombre,
                     Nombre = x.Nombre,
                     PrimerApellido = x.PrimerApellido,
                     SegundoApellido = x.SegundoApellido,

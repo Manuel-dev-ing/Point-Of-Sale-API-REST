@@ -10,7 +10,7 @@ using POSNet.Application.Interfaces;
 
 namespace POSNet.Application.Features.Proveedores.Queries.Handlers
 {
-    public class GetProveedorQueryHandler : IRequestHandler<GetProveedorQuery, ProveedorDTO?>
+    public class GetProveedorQueryHandler : IRequestHandler<GetProveedorQuery, ProveedoresDTO?>
     {
         private readonly IProveedoresRepository proveedoresRepository;
 
@@ -20,7 +20,7 @@ namespace POSNet.Application.Features.Proveedores.Queries.Handlers
         }
 
 
-        public async Task<ProveedorDTO?> Handle(GetProveedorQuery request, CancellationToken cancellationToken)
+        public async Task<ProveedoresDTO?> Handle(GetProveedorQuery request, CancellationToken cancellationToken)
         {
             var proveedor = await proveedoresRepository.GetProveedor(request.id);
             if (proveedor == null)

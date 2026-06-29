@@ -8,7 +8,7 @@ using POSNet.Application.DTOs;
 
 namespace POSNet.Application.Features.Proveedores.Queries
 {
-    public record GetProveedorQuery(int id) : IRequest<ProveedorDTO?>
+    public record GetProveedorQuery(int id) : IRequest<ProveedoresDTO?>
     {
     }
 }
