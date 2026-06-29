@@ -15,6 +15,8 @@ namespace POSNet.Application.DTOs
 
         public int IdProducto { get; set; }
 
+        public List<RolDTO> Roles { get; set; }
+
         public string Tipo { get; set; }
 
         public int Cantidad { get; set; }

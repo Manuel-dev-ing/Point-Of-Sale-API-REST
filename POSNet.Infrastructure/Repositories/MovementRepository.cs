@@ -23,17 +23,24 @@ namespace POSNet.Infrastructure.Repositories
         public async Task<List<MovementDTO>> GetMovements()
         {
 
-            var movements = await context.Movimientos.Select(x => new MovementDTO()
-            {
-                Id = x.Id,
-                IdUsuario = (int)x.IdUsuario,
-                IdProducto = (int)x.IdProducto,
-                Tipo = x.Tipo,
-                Cantidad = (int)x.Cantidad,
-                Motivo = x.Motivo,
-                Fecha = (DateOnly)x.Fecha
+            var movements = await context.Movimientos
+                .Select(x => new MovementDTO()
+                {
+                    Id = x.Id,
+                    IdUsuario = (int)x.IdUsuario,
+                    IdProducto = (int)x.IdProducto,
+                    Roles = x.IdUsuarioNavigation.UsuarioRols.Select(d => new RolDTO()
+                    {
+                        Id = d.IdRol,
+                        Nombre = d.IdRolNavigation.Nombre
 
-            }).ToListAsync();
+                    }).ToList(),
+                    Tipo = x.Tipo,
+                    Cantidad = (int)x.Cantidad,
+                    Motivo = x.Motivo,
+                    Fecha = (DateOnly)x.Fecha
+
+                }).ToListAsync();
 
             return movements;
 
