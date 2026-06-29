@@ -14,12 +14,14 @@ namespace POSNet.Application.Features.Ventas.Commands.Handlers
         private readonly IUnitOfWork unitOfWork;
         private readonly IVentasRepository ventasRepository;
         private readonly IProductsRepository productsRepository;
+        private readonly IMovementRepository movementRepository;
 
-        public CreateVentaCommandHandler(IUnitOfWork unitOfWork, IVentasRepository ventasRepository, IProductsRepository productsRepository)
+        public CreateVentaCommandHandler(IUnitOfWork unitOfWork, IVentasRepository ventasRepository, IProductsRepository productsRepository, IMovementRepository movementRepository)
         {
             this.unitOfWork = unitOfWork;
             this.ventasRepository = ventasRepository;
             this.productsRepository = productsRepository;
+            this.movementRepository = movementRepository;
         }
 
         public async Task Handle(CreateVentaCommand request, CancellationToken cancellationToken)
@@ -53,7 +55,24 @@ namespace POSNet.Application.Features.Ventas.Commands.Handlers
                 {
                     var producto = await productsRepository.getProductoById(item.IdProducto);
                     producto.StockInicial -= item.Cantidad;
+
+                    //
+                    var movement = new Movimiento()
+                    {
+                        IdUsuario = request.IdUsuario,
+                        IdProducto = item.IdProducto,
+                        Motivo = "Venta",
+                        Cantidad = item.Cantidad,
+                        Tipo = "salida",
+                        Fecha = DateOnly.FromDateTime(DateTime.Now)
+                    };
+
+                    //agregar movimiento
+                    await movementRepository.crear(movement);
+
                     await productsRepository.update(producto);
+
+                
                 }
 
                 await ventasRepository.createVenta(venta);

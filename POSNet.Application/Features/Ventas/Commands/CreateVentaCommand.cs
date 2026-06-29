@@ -9,7 +9,7 @@ using POSNET.Domain.Entities;
 
 namespace POSNet.Application.Features.Ventas.Commands
 {
-    public record CreateVentaCommand(int IdCliente, int IdUsuario, int NumeroVenta, decimal SubTotal, decimal Total, IEnumerable<DetalleVentaDTO> DetalleVenta) : IRequest
+    public record CreateVentaCommand(int IdCliente, int IdUsuario, string NumeroVenta, decimal SubTotal, decimal Total, IEnumerable<DetalleVentaDTO> DetalleVenta) : IRequest
     {
     }
 }
