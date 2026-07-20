@@ -25,6 +25,7 @@ namespace POSNet.Application.DependencyInjection
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+
             return services;
         }
 

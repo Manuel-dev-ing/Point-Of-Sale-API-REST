@@ -1,6 +1,9 @@
-﻿using MediatR;
+﻿using System.Linq;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using POSNet.Application.Common.Extensions;
 using POSNet.Application.DTOs;
 using POSNet.Application.Features.Products.Commands;
 using POSNet.Application.Features.Products.Queries;
@@ -20,15 +23,17 @@ namespace POSNET.API.Controllers
         }
 
         [HttpGet]
-        public async Task<List<ProductsDTO>> get()
+        public async Task<IEnumerable<ProductsDTO>> get([FromQuery] PaginacionDTO paginacionDTO)
         {
-            var products_dto = await mediator.Send(new GetProductsQuery());
+            var queryable = await mediator.Send(new GetProductsQuery());
+            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
+            var products_dto = await queryable.OrderBy(x => x.Id).Paginar(paginacionDTO).ToListAsync();
 
             return products_dto;
         }
 
         [HttpGet("getAllProducts")]
-        public async Task<List<ProductsDTO>> getAllProducts()
+        public async Task<IEnumerable<ProductsDTO>> getAllProducts()
         {
             var products_dto = await mediator.Send(new GetProductsQuery());
 

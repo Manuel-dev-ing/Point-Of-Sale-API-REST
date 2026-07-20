@@ -9,7 +9,7 @@ using POSNet.Application.Interfaces;
 
 namespace POSNet.Application.Features.Clients.Queries.Handlers
 {
-    public class ListClientsQueryHandler : IRequestHandler<GetClientsQuery, List<ClientDTO>>
+    public class ListClientsQueryHandler : IRequestHandler<GetClientsQuery, IQueryable<ClientDTO>>
     {
         private readonly IClientsRepository clientsRepository;
 
@@ -17,7 +17,7 @@ namespace POSNet.Application.Features.Clients.Queries.Handlers
         {
             this.clientsRepository = clientsRepository;
         }
-        public async Task<List<ClientDTO>> Handle(GetClientsQuery request, CancellationToken cancellationToken)
+        public async Task<IQueryable<ClientDTO>> Handle(GetClientsQuery request, CancellationToken cancellationToken)
         {
 
             var clients = await clientsRepository.GetClientsAsync();

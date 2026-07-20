@@ -64,9 +64,9 @@ namespace POSNet.Infrastructure.Repositories
         }
 
 
-        public async Task<List<ProductsDTO>> GetProducts()
+        public async Task<IQueryable<ProductsDTO>> GetProducts()
         {
-            var productsDTO = await context.Productos
+            var productsDTO = context.Productos
                                     .Include(x => x.IdCategoriaNavigation)
                                     .Where(x => x.Estado == true)
                                     .Select(x => new ProductsDTO()
@@ -81,7 +81,7 @@ namespace POSNet.Infrastructure.Repositories
                                         Descripcion = x.Descripcion,
                                         Estado = (bool)x.Estado
 
-                                    }).ToListAsync();
+                                    }).AsQueryable();
          
             return productsDTO;
         }

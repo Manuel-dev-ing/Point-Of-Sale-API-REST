@@ -9,7 +9,7 @@ using POSNet.Application.Interfaces;
 
 namespace POSNet.Application.Features.Products.Queries.Handlers
 {
-    public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, List<ProductsDTO>>
+    public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, IQueryable<ProductsDTO>>
     {
         private readonly IProductsRepository productsRepository;
 
@@ -19,7 +19,7 @@ namespace POSNet.Application.Features.Products.Queries.Handlers
         }
 
 
-        public async Task<List<ProductsDTO>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
+        public async Task<IQueryable<ProductsDTO>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
 
             var products_dto = await productsRepository.GetProducts();

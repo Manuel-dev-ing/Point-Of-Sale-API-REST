@@ -17,6 +17,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddIdentityDatabaseFirst();
 builder.Services.AddApplication();
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.MapInboundClaims = false;
@@ -67,7 +69,8 @@ builder.Services.AddCors(x =>
         opciones.WithOrigins(origenes_permitidos)
         .AllowAnyHeader()
         .AllowAnyMethod()
-        .AllowCredentials();
+        .AllowCredentials()
+        .WithExposedHeaders("cantidad-total-registros");
 
     });
 

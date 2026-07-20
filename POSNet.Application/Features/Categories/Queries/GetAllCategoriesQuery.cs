@@ -8,7 +8,7 @@ using POSNet.Application.DTOs;
 
 namespace POSNet.Application.Features.Categories.Queries
 {
-    public record GetCategoriesQuery : IRequest<IQueryable<CategoryDTO>>
+    public record GetAllCategoriesQuery : IRequest<List<CategoryDTO>>
     {
     }
 }

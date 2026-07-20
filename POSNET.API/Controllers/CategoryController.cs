@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using POSNet.Application.Common.Extensions;
 using POSNet.Application.DTOs;
 using POSNet.Application.Features.Categories.Commands;
 using POSNet.Application.Features.Categories.Queries;
@@ -23,11 +25,22 @@ namespace POSNET.API.Controllers
 
 
         [HttpGet]
-        public async Task<List<CategoryDTO>> get()
+        public async Task<IEnumerable<CategoryDTO>> get([FromQuery] PaginacionDTO paginacionDTO)
         {
-            var categoriesDTO = await mediator.Send(new GetCategoriesQuery());
-            
+            var queryable = await mediator.Send(new GetCategoriesQuery());
+            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
+            var categoriesDTO = await queryable.OrderBy(x => x.Id).Paginar(paginacionDTO).ToListAsync();
+
+
             return categoriesDTO;
+        }
+
+        [HttpGet("getAllCategories")]
+        public async Task<IEnumerable<CategoryDTO>> GetAllCategories()
+        {
+            var categories = await mediator.Send(new GetAllCategoriesQuery());
+
+            return categories;
         }
 
         [HttpGet("{id:int}")]

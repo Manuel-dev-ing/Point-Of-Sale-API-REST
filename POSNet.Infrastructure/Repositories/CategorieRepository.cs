@@ -47,20 +47,38 @@ namespace POSNet.Infrastructure.Repositories
         }
 
 
-        public async Task<List<CategoryDTO>> GetCategories()
+        public async Task<List<CategoryDTO>> getAllCategories()
         {
             var categories = await context.Categorias
                 .Where(x => x.Estado == true)
                 .Select(x => new CategoryDTO()
-            {
-                Id = x.Id,
-                Nombre = x.Nombre,
-                Descripcion = x.Descripcion,
-                Estado = (bool)x.Estado,
-                FechaCreacion = (DateOnly)x.FechaCreacion,
-                Productos = x.Productos.Count(),
+                {
+                    Id = x.Id,
+                    Nombre = x.Nombre,
+                    Descripcion = x.Descripcion,
+                    Estado = (bool)x.Estado,
+                    FechaCreacion = (DateOnly)x.FechaCreacion,
+                    Productos = x.Productos.Count(),
 
-           }).ToListAsync();
+                }).ToListAsync();
+
+            return categories;
+        }
+
+        public async Task<IQueryable<CategoryDTO>> GetCategories()
+        {
+            var categories = context.Categorias
+                .Where(x => x.Estado == true)
+                .Select(x => new CategoryDTO()
+                {
+                    Id = x.Id,
+                    Nombre = x.Nombre,
+                    Descripcion = x.Descripcion,
+                    Estado = (bool)x.Estado,
+                    FechaCreacion = (DateOnly)x.FechaCreacion,
+                    Productos = x.Productos.Count(),
+
+                }).AsQueryable();
 
             return categories;
         }

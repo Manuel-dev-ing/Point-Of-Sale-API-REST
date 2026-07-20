@@ -8,7 +8,7 @@ using POSNet.Application.DTOs;
 
 namespace POSNet.Application.Features.Products.Queries
 {
-    public class GetProductsQuery : IRequest<List<ProductsDTO>>
+    public class GetProductsQuery : IRequest<IQueryable<ProductsDTO>>
     {
     }
 }

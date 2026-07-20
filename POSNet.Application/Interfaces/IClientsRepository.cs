@@ -14,7 +14,7 @@ namespace POSNet.Application.Interfaces
         Task AddAsync(Cliente cliente);
         Task<Cliente> GetClient(int id);
         Task<ClientDTO> GetClientAsync(int id);
-        Task<List<ClientDTO>> GetClientsAsync();
+        Task<IQueryable<ClientDTO>> GetClientsAsync();
         Task<int> getTotalClients();
         Task UpdateAsync(Cliente cliente);
     }

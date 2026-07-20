@@ -60,9 +60,9 @@ namespace POSNet.Infrastructure.Repositories
             return clientDTO;
         }
 
-        public async Task<List<ClientDTO>> GetClientsAsync()
+        public async Task<IQueryable<ClientDTO>> GetClientsAsync()
         {
-            var clientsDTO = await context.Clientes
+            var clientsDTO = context.Clientes
                 .Where(x => x.Estado == true)
                 .Select(x => new ClientDTO()
                 {
@@ -80,7 +80,8 @@ namespace POSNet.Infrastructure.Repositories
                         Total = (decimal)v.Total
 
                     }).ToList()
-                }).ToListAsync();
+
+                }).AsQueryable();
 
             return clientsDTO;
         }

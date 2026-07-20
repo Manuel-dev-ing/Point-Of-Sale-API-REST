@@ -13,7 +13,7 @@ namespace POSNet.Application.Interfaces
         Task<List<ProductDTO>> getLowStockProducts();
         Task<ProductDTO> getProduct(int id);
         Task<Producto> getProductoById(int id);
-        Task<List<ProductsDTO>> GetProducts();
+        Task<IQueryable<ProductsDTO>> GetProducts();
         Task<int> getTotalInventory();
         Task<int> getTotalProducts();
         Task<int> getTotalUnitsProducts();

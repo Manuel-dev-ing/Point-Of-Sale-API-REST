@@ -12,7 +12,8 @@ namespace POSNet.Application.Interfaces
     public interface ICategoryRepository
     {
         Task AddAsync(Categoria categoria);
-        Task<List<CategoryDTO>> GetCategories();
+        Task<List<CategoryDTO>> getAllCategories();
+        Task<IQueryable<CategoryDTO>> GetCategories();
         Task<CategoryDTO> GetCategory(int id);
         Task<Categoria> GetCategoryById(int id);
         Task UpdateAsync(Categoria categoria);
